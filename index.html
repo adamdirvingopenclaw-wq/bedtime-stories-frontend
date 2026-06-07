@@ -544,6 +544,24 @@
         </div>
     </section>
 
+    <!-- Signup Section -->
+    <section id="signup" style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 36px; margin-bottom: 20px;">Ready to Start?</h2>
+            <p style="font-size: 18px; margin-bottom: 40px; opacity: 0.95;">Join thousands of parents giving their kids personalized bedtime stories.</p>
+            
+            <div style="max-width: 500px; margin: 0 auto;">
+                <form onsubmit="handleSignup(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="email" placeholder="Enter your email" required style="padding: 15px; border: none; border-radius: 5px; font-size: 16px;">
+                    <input type="text" placeholder="Child's name" required style="padding: 15px; border: none; border-radius: 5px; font-size: 16px;">
+                    <input type="number" placeholder="Child's age" min="1" max="12" required style="padding: 15px; border: none; border-radius: 5px; font-size: 16px;">
+                    <button type="submit" style="padding: 15px 40px; background: white; color: #667eea; border: none; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Start Free Trial →</button>
+                </form>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">7-day free trial. No credit card required.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -567,6 +585,24 @@
                 }
             });
         });
+
+        // Handle signup form
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = event.target.querySelector('input[type="email"]').value;
+            const childName = event.target.querySelector('input[type="text"]').value;
+            const childAge = event.target.querySelector('input[type="number"]').value;
+            
+            // Store signup data
+            localStorage.setItem('bedtime_signup', JSON.stringify({ email, childName, childAge, signupTime: new Date().toISOString() }));
+            
+            // Show confirmation
+            alert(`Welcome, ${childName}'s parent! 🎉\n\nWe've sent a confirmation to ${email}. Check your inbox to start the free trial.`);
+            
+            // Reset form
+            event.target.reset();
+        }
     </script>
 </body>
 </html>
